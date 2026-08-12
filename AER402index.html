@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVCAER4052FC — Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3F0E7;--paper-alt:#ECE6D6;--card:#FFFFFF;--ink:#23201A;--ink-soft:#5B564A;--accent:#145A4A;--accent-dark:#0E463A;--accent-tab:#8B3A2F;--rule:#D9D2C1;--focus:#0E463A;--radius:10px;font-size:16px;}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.5;min-height:100vh;}
+h1{font-family:'Public Sans',system-ui,sans-serif;font-weight:800;letter-spacing:-.01em;margin:0 0 .3em;}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.02em;}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--accent-dark);color:#fff;padding:.75em 1.25em;z-index:100;border-radius:0 0 8px 0;font-weight:600;}
+.skip-link:focus{left:0;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;}
+header.top{border-bottom:2px solid var(--ink);padding:1.75rem 1.5rem 1.25rem;max-width:700px;margin:0 auto;}
+header.top .eyebrow{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-dark);background:var(--paper-alt);border:1px solid var(--rule);padding:.2em .6em;border-radius:4px;margin-bottom:.6rem;}
+main{max-width:700px;margin:0 auto;padding:1.5rem;}
+.deck-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem;margin-bottom:1rem;}
+.stage{perspective:1400px;max-width:560px;margin:0 auto 1.25rem;}
+.card-face{position:relative;width:100%;min-height:260px;border-radius:var(--radius);background:transparent;border:none;padding:0;cursor:pointer;display:block;}
+.card-inner{display:block;position:relative;width:100%;height:100%;min-height:260px;transition:transform .5s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+.card-face[aria-pressed="true"] .card-inner{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;background:var(--card);border:1.5px solid var(--rule);border-radius:var(--radius);box-shadow:0 2px 0 var(--rule),0 10px 24px -12px rgba(35,32,26,.35);padding:2rem 1.75rem;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.face::before{content:"";position:absolute;left:1.75rem;right:1.75rem;top:3.2rem;height:2px;background:repeating-linear-gradient(to right,var(--rule) 0 10px,transparent 10px 16px);}
+.face .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--accent-tab);padding:.25em .6em;border-radius:3px 3px 3px 0;}
+.face-badges{display:flex;align-items:center;gap:.5rem;align-self:flex-start;margin-bottom:1.4rem;}
+.verified-stamp-wrap{position:absolute;right:1.1rem;bottom:1.1rem;transform:rotate(-9deg);pointer-events:none;}
+.verified-stamp-ring{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2rem;width:76px;height:76px;border-radius:50%;border:2px solid var(--accent);box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 5px var(--accent);color:var(--accent);opacity:.88;}
+.verified-stamp-ring svg{flex:none;}
+.verified-stamp-text{font-family:'Public Sans',sans-serif;font-weight:800;font-size:.5rem;line-height:1.2;letter-spacing:.06em;text-align:center;text-transform:uppercase;}
+.face.back .tag{background:var(--accent-dark);}
+.face .content{font-family:'Public Sans',system-ui,sans-serif;font-weight:500;font-size:1.3rem;line-height:1.45;flex:1;display:flex;align-items:center;overflow-wrap:anywhere;}
+.face .idx{position:absolute;top:.9rem;right:1rem;font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--ink-soft);}
+.face.back{transform:rotateY(180deg);}
+.controls{display:flex;justify-content:center;align-items:center;gap:.6rem;flex-wrap:wrap;}
+.btn{font-family:'Public Sans',sans-serif;font-weight:600;font-size:.95rem;border-radius:8px;border:1.5px solid var(--accent-dark);background:var(--accent);color:#fff;padding:.7em 1.3em;min-height:44px;cursor:pointer;}
+.btn:hover{background:var(--accent-dark);}
+.btn.secondary{background:var(--card);color:var(--accent-dark);}
+.btn.secondary:hover{background:var(--paper-alt);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.hint{color:var(--ink-soft);font-size:.9rem;text-align:center;}
+#sr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+@media (prefers-reduced-motion: reduce){.card-inner{transition:none;}}
+@media (max-width:500px){.face .content{font-size:1.2rem;}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="top">
+<span class="eyebrow">Catalog Drawer</span>
+<h1>AVCAER4052FC</h1>
+</header>
+<main id="main">
+<div class="deck-meta"><span class="mono" id="progress"></span></div>
+<div class="stage">
+<button type="button" class="card-face" id="card-btn" aria-pressed="false">
+<span class="card-inner" id="card-inner">
+<span class="face front"><span class="idx mono" id="idx-front"></span><span class="face-badges"><span class="tag">Question</span></span><span class="content" id="front-text"></span></span>
+<span class="face back" aria-hidden="true"><span class="idx mono" id="idx-back"></span><span class="face-badges"><span class="tag">Answer</span></span><span class="content" id="back-text"></span><span class="verified-stamp-wrap" aria-hidden="true"><span class="verified-stamp-ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="verified-stamp-text">Verified<br>Correct</span></span></span></span>
+</span>
+</button>
+</div>
+<div class="controls">
+<button type="button" class="btn secondary" id="prev-btn">← Previous</button>
+<button type="button" class="btn" id="flip-btn">Flip card</button>
+<button type="button" class="btn secondary" id="next-btn">Next →</button>
+<button type="button" class="btn secondary" id="shuffle-btn">Shuffle</button>
+</div>
+<p class="hint">Press <kbd>Space</kbd> or <kbd>Enter</kbd> on the focused card to flip it, and use the ←/→ arrow keys to move between cards.</p>
+<div id="sr-status" aria-live="polite"></div>
+</main>
+<script>
+(function(){
+"use strict";
+var cards = [{"front":"What is a ground stud?","back":"A threaded fastener providing a low-resistance electrical path to the aircraft frame."},{"front":"Why is proper grounding considered a safety-critical task in aircraft manufacturing?","back":"It prevents avionics malfunctions, electromagnetic interference, and fuel vapor ignition from static discharge."},{"front":"What distinguishes a direct ground stud installation from other grounding methods?","back":"It is installed directly to the aircraft skin or structural panel without an intermediate bonding jumper."},{"front":"In a direct ground stud assembly, what component ensures the metal-to-metal contact is clamped tight?","back":"A self-locking nut."},{"front":"How does sealant protect a fastener hole from galvanic corrosion?","back":"It creates a moisture barrier protecting the structural panel and the stud shank."},{"front":"Beyond corrosion prevention, why is a fay seal required for structural integrity?","back":"It preserves the clamping load of the fastener by protecting the surrounding structure."},{"front":"Term: Fay Seal","back":"Definition: A sealing method where sealant is applied to the mating surfaces before the parts are assembled."},{"front":"What is the primary mechanical difference between a fay seal and a topcoat seal?","back":"A fay seal is integral to the joint and creates a void-free moisture barrier between surfaces."},{"front":"The bead of sealant applied around the perimeter of hardware after assembly is known as a _____.","back":"Fillet Seal"},{"front":"What is the purpose of using a fillet seal in addition to a fay seal?","back":"It acts as a secondary moisture barrier and allows for visual inspection conformance."},{"front":"Which sealant class is most commonly specified for fay sealing a direct ground stud?","back":"Class B (application grade, medium consistency)."},{"front":"What tool is required to verify the electrical bonding of a ground stud installation?","back":"A calibrated low-resistance OHMmeter (micro-ohmmeter)."},{"front":"What cleaning agent is standard for prepping aircraft surfaces for sealing?","back":"Isopropyl alcohol ($99\\%$ pure) or an approved solvent wipe."},{"front":"Why must you avoid using steel wool to abrade aluminum surfaces during preparation?","back":"Metallic contamination from steel particles will accelerate galvanic corrosion."},{"front":"When handling sealants, why is it mandatory to wear nitrile or neoprene gloves?","back":"Sealant chemicals can cause skin sensitization with repeated exposure."},{"front":"What is the single most critical factor for sealant adhesion and performance?","back":"Proper surface preparation."},{"front":"Task: Surface Inspection","back":"Procedure: Verify correct hole size/location and confirm there are no cracks, delamination, or pre-existing corrosion."},{"front":"Task: Abrading the Faying Surface","back":"Procedure: Use a Scotch-Brite pad to remove the passive oxide layer in a consistent circular or cross-hatch pattern."},{"front":"Why is a micro-textured surface created during the abrasion step?","back":"It dramatically improves the mechanical adhesion of the sealant."},{"front":"How should solvent be applied to the aircraft surface during cleaning?","back":"Apply to a clean, lint-free cloth first; never pour directly onto the surface."},{"front":"Task: Solvent Cleaning","back":"Procedure: Wipe firmly in a single direction using a fresh section of cloth for each pass."},{"front":"What is the typical minimum evaporation time for solvent at room temperature before applying sealant?","back":"$3 \\text{ to } 5 \\text{ minutes}$."},{"front":"When does the 'pot life' of a sealant officially begin?","back":"The moment the mixing process starts."},{"front":"How do higher ambient temperatures affect sealant application?","back":"They accelerate the cure time and shorten the pot life."},{"front":"Task: Mixing Two-Part Cartridge Sealant","back":"Procedure: Attach static nozzle, expel and discard the first $\\frac{1}{2}$ inch, and ensure the final color is uniform."},{"front":"When using the bench mixing method for sealant, why should you fold the material instead of whipping it?","back":"Folding avoids whipping in air bubbles that could compromise the seal."},{"front":"In the assembly sequence, when must the fay seal be applied?","back":"Before the stud is inserted and the nut is run down."},{"front":"How far should sealant coverage extend beyond the footprint of the ground stud flange?","back":"At least $\\frac{1}{4}$ inch on all sides."},{"front":"Task: Sealing the Ground Stud","back":"Procedure: Apply sealant to the panel surface, the stud base flange, and the stud shank area."},{"front":"Task: Inserting the Ground Stud","back":"Procedure: Push the stud through without rotating it to avoid displacing the sealant bead."},{"front":"What visual indication confirm adequate sealant coverage during stud insertion?","back":"Sealant squeeze-out appearing around the entire stud flange perimeter."},{"front":"Why is a self-locking nut used on ground stud installations?","back":"To prevent the fastener from loosening due to aircraft vibration."},{"front":"What is the reuse policy for self-locking nuts in aircraft assembly?","back":"They are single-use only and must never be reused."},{"front":"Task: Running Down the Nut","back":"Procedure: Start by hand to prevent cross-threading, then snug with a wrench until it contacts the panel."},{"front":"If a ground stud spins in the hole during the run-down process, what does this indicate?","back":"The stud is not properly anchored or the hole is oversize."},{"front":"What is the risk of under-torquing a ground stud nut?","back":"The stud may move under vibration, eventually breaking the sealant interface."},{"front":"Task: Torquing the Nut","back":"Procedure: Use a calibrated torque wrench, apply smooth force, stop at the click, and apply a torque stripe."},{"front":"Why must a click-type torque wrench be returned to its lowest setting after use?","back":"Storing it at a set value fatigues the internal spring and degrades calibration accuracy."},{"front":"How should you hold a torque wrench to ensure accurate delivery?","back":"At the center of the handle grip, perpendicularly to the wrench handle axis."},{"front":"What is 'Tack-Free Time' for polysulfide sealants?","back":"The phase (typically $2 \\text{ to } 4 \\text{ hours}$) where the surface feels dry but the interior is still curing."},{"front":"What is the minimum cure time required before performing electrical resistance testing at room temperature?","back":"Typically $24 \\text{ hours}$."},{"front":"Define Electrical Bonding Resistance.","back":"The measurement of electrical current flow ease from the stud through the joint into the aircraft structure."},{"front":"What is the typical maximum bonding resistance allowed for a direct ground stud?","back":"$1 \\text{ milliohm } (0.001 \\text{ } \\Omega)$ or less."},{"front":"Why is a standard digital multimeter unsuitable for verifying ground stud bonding?","back":"It lacks sufficient resolution to measure milliohm-range resistance accurately."},{"front":"To what national standard must aircraft electrical testing instruments be traceable?","back":"NIST (National Institute of Standards and Technology)."},{"front":"Task: Placing OHMmeter Probes","back":"Procedure: Place one probe on the bare metal of the stud and the second on the adjacent aircraft structure."},{"front":"Why must an OHMmeter be 'nulled' or 'zeroed' before taking a measurement?","back":"To subtract the resistance of the probe leads from the final reading."},{"front":"What action should be taken if a resistance test initially fails the limit?","back":"Re-verify probe contact and check that the stud is torqued to specification."},{"front":"If a ground stud installation fails resistance tests after troubleshooting, what formal document must be raised?","back":"A Nonconformance Report (NCR)."},{"front":"Which visual reject condition involves the physical orientation of the stud?","back":"Stud is canted or protruding improperly from the panel."},{"front":"What information regarding the sealant must be recorded on the work order?","back":"The batch number and the exact time of mixing."},{"front":"What documentation must be attached to the work order to prove bonding compliance?","back":"The Resistance Test Record."},{"front":"What safety step must be performed before beginning work on a ground stud to prevent shock?","back":"De-energize and lock out (LOTO) all associated electrical circuits."},{"front":"Why is adequate ventilation required when using cleaning solvents like IPA?","back":"Solvent vapors are flammable and can cause respiratory irritation in enclosed spaces."},{"front":"Term: Pot Life","back":"Definition: The usable working time of a mixed two-part sealant before it must be discarded."}];
+var order = cards.map(function(_, i){ return i; });
+var current = 0;
+var cardBtn = document.getElementById("card-btn");
+var frontText = document.getElementById("front-text");
+var backText = document.getElementById("back-text");
+var idxFront = document.getElementById("idx-front");
+var idxBack = document.getElementById("idx-back");
+var progressEl = document.getElementById("progress");
+var prevBtn = document.getElementById("prev-btn");
+var nextBtn = document.getElementById("next-btn");
+var flipBtn = document.getElementById("flip-btn");
+var shuffleBtn = document.getElementById("shuffle-btn");
+var srStatus = document.getElementById("sr-status");
+function shuffleArray(arr){ var a = arr.slice(); for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function renderCard(announce){
+  var c = cards[order[current]];
+  frontText.textContent = c.front;
+  backText.textContent = c.back;
+  idxFront.textContent = String(current + 1).padStart(3, "0");
+  idxBack.textContent = String(current + 1).padStart(3, "0");
+  cardBtn.setAttribute("aria-pressed", "false");
+  cardBtn.setAttribute("aria-label", "Question: " + c.front + ". Activate to show the answer.");
+  progressEl.textContent = "Card " + (current + 1) + " of " + cards.length;
+  if (announce) srStatus.textContent = "Card " + (current + 1) + " of " + cards.length + ". Question: " + c.front;
+  prevBtn.disabled = cards.length <= 1;
+  nextBtn.disabled = cards.length <= 1;
+}
+function flipCard(){
+  var pressed = cardBtn.getAttribute("aria-pressed") === "true";
+  var c = cards[order[current]];
+  if (pressed){
+    cardBtn.setAttribute("aria-pressed", "false");
+    cardBtn.setAttribute("aria-label", "Question: " + c.front + ". Activate to show the answer.");
+    srStatus.textContent = "Showing question: " + c.front;
+  } else {
+    cardBtn.setAttribute("aria-pressed", "true");
+    cardBtn.setAttribute("aria-label", "Verified answer: " + c.back + ". Activate to show the question.");
+    srStatus.textContent = "Showing verified answer: " + c.back;
+  }
+}
+function goTo(delta){
+  if (cards.length < 2) return;
+  current = (current + delta + cards.length) % cards.length;
+  renderCard(true);
+}
+cardBtn.addEventListener("click", flipCard);
+flipBtn.addEventListener("click", function(){ cardBtn.focus(); flipCard(); });
+prevBtn.addEventListener("click", function(){ goTo(-1); });
+nextBtn.addEventListener("click", function(){ goTo(1); });
+shuffleBtn.addEventListener("click", function(){ order = shuffleArray(order); current = 0; renderCard(false); srStatus.textContent = "Deck shuffled. Card 1 of " + cards.length; });
+document.addEventListener("keydown", function(e){
+  if (e.key === "ArrowLeft"){ e.preventDefault(); goTo(-1); }
+  else if (e.key === "ArrowRight"){ e.preventDefault(); goTo(1); }
+});
+if (cards.length){ renderCard(true); } else { progressEl.textContent = "No cards found."; }
+})();
+</script>
+</body>
+</html>
